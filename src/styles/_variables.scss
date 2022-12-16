@@ -1,0 +1,39 @@
+// Colors
+$primary-color: #ffffff;
+$text-color: #0f0f0f;
+$title-color: #676767;
+$primary-background: #cccccc;
+$secondary-background: #f8f8ff;
+$accept-color: #483ea8;
+$valid-color: #11af22;
+$invalid-color: #e41d1d;
+$border-color: rgba(56, 78, 183, 0.3);
+$outline-color: #e3e3e3;
+
+// Typography
+$primary-font: 'Mulish';
+// Font sizes
+$xl-text: 22px;
+$lg-text: 16px;
+$md-text: 14px;
+$sm-text: 12px;
+$xs-text: 10px;
+// Line heights
+$xl-lh: 28px;
+$lg-lh: 24px;
+$md-lh: 20px;
+$sm-lh: 18px;
+$xs-lh: 16px;
+// Font weights
+$bold-weight: 700;
+$regular-weight: 400;
+
+// Breakpoints
+// Small tablets and large smartphones (landscape view)
+$screen-sm-max: 576px;
+// Small tablets (portrait view)
+$screen-md-max: 768px;
+// Tablets and small desktops
+$screen-lg-max: 992px;
+// Large tablets and desktops
+$screen-xl-max: 1240px;
