@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "sass": "^1.56.2",
+    "uuid": "^9.0.0",
     "vue": "^3.2.45"
   },
   "devDependencies": {
