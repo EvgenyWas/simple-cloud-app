@@ -8,11 +8,12 @@
 import MainBox from './components/MainBox/MainBox.vue';
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .main {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: $primary-background;
+  width: 100%;
+  height: 100vh;
 }
 </style>
