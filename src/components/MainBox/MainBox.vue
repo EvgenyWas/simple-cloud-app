@@ -19,8 +19,8 @@
           @change=""
         />
       </form>
-      <UploadingFiles :uploadingFiles="uploadingFilesMock" />
-      <UploadedFiles />
+      <UploadingFiles :uploadingFiles="filesMock" />
+      <UploadedFiles :uploadedFiles="filesMock" />
     </div>
   </div>
 </template>
@@ -39,7 +39,7 @@ const acceptedFormates = computed<string>(
   () => '.' + SUPPORTED_FORMATES.join(', .').toLowerCase()
 );
 
-const uploadingFilesMock = [
+const filesMock = [
   { id: '1', name: 'I am an uploading file name', progress: 55 },
   { id: '2', name: 'I am an uploading file name', progress: 25 },
 ];

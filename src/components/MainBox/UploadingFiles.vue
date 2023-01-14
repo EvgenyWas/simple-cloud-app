@@ -8,7 +8,7 @@
         class="uploading-files__item"
       >
         <p class="uploading-files__name">{{ file.name }}</p>
-        <button class="uploading-files__remove">
+        <button class="uploading-files__remove" @click="removeFile">
           <RemoveIcon />
         </button>
         <UiProgressBar :progress="file.progress" />
@@ -30,6 +30,8 @@ type Props = {
 defineProps<Props>();
 
 const uploadingTitle = computed<string>(() => `Uploading - `);
+
+const removeFile = () => {};
 </script>
 
 <style scoped lang="scss">
@@ -38,6 +40,7 @@ const uploadingTitle = computed<string>(() => `Uploading - `);
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  margin-bottom: 30px;
 
   &__title {
     margin-bottom: 10px;
