@@ -11,6 +11,7 @@
         <button class="uploading-files__remove">
           <RemoveIcon />
         </button>
+        <UiProgressBar :progress="file.progress" />
       </li>
     </TransitionGroup>
   </div>
@@ -20,6 +21,7 @@
 import { RemoveIcon } from '@/components/icons';
 import type { TUploadingFile } from '@/types';
 import { computed } from 'vue';
+import UiProgressBar from '../ui/UiProgressBar.vue';
 
 type Props = {
   uploadingFiles: Array<TUploadingFile>;
@@ -55,6 +57,7 @@ const uploadingTitle = computed<string>(() => `Uploading - `);
   }
 
   &__item {
+    position: relative;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -82,6 +85,10 @@ const uploadingTitle = computed<string>(() => `Uploading - `);
     border-radius: 50%;
     background-color: $outline-color;
     cursor: pointer;
+
+    &:hover {
+      background-color: $title-color;
+    }
   }
 }
 </style>
