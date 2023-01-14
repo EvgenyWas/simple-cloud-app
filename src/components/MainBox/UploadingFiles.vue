@@ -1,22 +1,87 @@
 <template>
   <div class="uploading-files">
-    <h3 class="uploading-files__title">Uploading</h3>
-    <ul class="uploading-files__list">
-      <li class="uploading-files__item">
-        <p class="uploading-files__text"></p>
+    <h3 class="uploading-files__title">{{ uploadingTitle }}</h3>
+    <TransitionGroup name="list" tag="ul" class="uploading-files__list">
+      <li
+        v-for="file in uploadingFiles"
+        :key="file.id"
+        class="uploading-files__item"
+      >
+        <p class="uploading-files__name">{{ file.name }}</p>
         <button class="uploading-files__remove">
           <RemoveIcon />
         </button>
       </li>
-    </ul>
+    </TransitionGroup>
   </div>
 </template>
 
 <script setup lang="ts">
 import { RemoveIcon } from '@/components/icons';
+import type { TUploadingFile } from '@/types';
+import { computed } from 'vue';
+
+type Props = {
+  uploadingFiles: Array<TUploadingFile>;
+};
+
+defineProps<Props>();
+
+const uploadingTitle = computed<string>(() => `Uploading - `);
 </script>
 
 <style scoped lang="scss">
 .uploading-files {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+
+  &__title {
+    margin-bottom: 10px;
+    font-weight: $bold-weight;
+    font-size: $md-text;
+    line-height: $sm-lh;
+    color: $title-color;
+    text-align: start;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid $outline-color;
+    border-radius: 4px;
+
+    &--error {
+      border: 1px solid $invalid-color;
+    }
+  }
+
+  &__name {
+    font-size: $sm-text;
+    line-height: $sm-lh;
+  }
+
+  &__remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    padding: 4px;
+    border-radius: 50%;
+    background-color: $outline-color;
+    cursor: pointer;
+  }
 }
 </style>

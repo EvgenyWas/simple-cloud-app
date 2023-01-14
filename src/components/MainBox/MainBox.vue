@@ -19,7 +19,7 @@
           @change=""
         />
       </form>
-      <UploadingFiles />
+      <UploadingFiles :uploadingFiles="uploadingFilesMock" />
       <UploadedFiles />
     </div>
   </div>
@@ -38,6 +38,11 @@ const supportedFormatesText = computed<string>(
 const acceptedFormates = computed<string>(
   () => '.' + SUPPORTED_FORMATES.join(', .').toLowerCase()
 );
+
+const uploadingFilesMock = [
+  { id: '1', name: 'I am an uploading file name', progress: 55 },
+  { id: '2', name: 'I am an uploading file name', progress: 25 },
+];
 </script>
 
 <style scoped lang="scss">
@@ -50,11 +55,12 @@ const acceptedFormates = computed<string>(
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 20px;
     padding: 30px 47px;
   }
 
   &__title {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     font-weight: $bold-weight;
     font-size: $xl-text;
     line-height: $xl-lh;
@@ -96,6 +102,7 @@ const acceptedFormates = computed<string>(
   &__desc {
     font-size: $sm-text;
     line-height: $sm-lh;
+    color: $title-color;
   }
 
   &__input {
