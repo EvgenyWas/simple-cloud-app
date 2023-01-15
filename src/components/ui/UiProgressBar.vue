@@ -1,8 +1,9 @@
 <template>
-  <div
-    :style="{ width: progress + '%' }"
+  <progress
+    :value="progress"
     :class="classes"
     class="ui-progress-bar"
+    max="100"
   />
 </template>
 
@@ -29,9 +30,23 @@ const classes = computed(() => ({
   position: absolute;
   left: -1px;
   z-index: 50;
+  width: 100%;
   height: 3px;
-  background-color: $accept-color;
-  border-radius: 10px;
+
+  &[value] {
+    -webkit-appearance: none;
+    appearance: none;
+
+    &::-webkit-progress-bar {
+      background-color: inherit;
+      border-radius: 10px;
+    }
+
+    &::-webkit-progress-value {
+      background-color: $accept-color;
+      border-radius: 10px;
+    }
+  }
 
   &--hidden {
     overflow: hidden;
