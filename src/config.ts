@@ -13,22 +13,3 @@ export const SUPPORTED_FORMATES = [
   'Word',
   'PPT',
 ];
-
-export const TEXT_CONFIG = {
-  titles: {
-    upload: 'upload',
-  },
-  buttons: {
-    upload: 'upload files',
-  },
-  inputs: {
-    drag_drop: 'drag & drop files',
-    browse: 'browse',
-    supported: 'Supported formates',
-  },
-  text: {
-    file: 'file',
-    uploading: 'uploading',
-    uploaded: 'uploaded',
-  },
-};
