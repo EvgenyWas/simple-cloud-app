@@ -2,22 +2,28 @@
   <div class="main-box">
     <div class="main-box__container">
       <h1 class="main-box__title">Cloud App</h1>
-      <form class="upload-form" for="upload">
+      <form
+        :class="{ 'upload-form--highlighted': isFormHighlighted }"
+        class="upload-form"
+        @dragenter.prevent="highlightForm"
+        @dragover.prevent="highlightForm"
+        @dragleave.prevent="unhighlightForm"
+        @drop.prevent="handleDrop"
+      >
         <UploadIcon class="upload-form__icon" />
-        <label class="upload-form__caption" for="upload"
-          >Drag & drop files or
-          <span class="upload-form__excerpt">Browse</span></label
-        >
-        <label class="upload-form__desc" for="upload">{{
-          supportedFormatesText
-        }}</label>
-        <input
-          :accept="acceptedFormates"
-          class="upload-form__input"
-          name="upload"
-          type="file"
-          @change=""
-        />
+        <span class="upload-form__fieldset">
+          <span class="upload-form__caption">Drag & drop files or </span>
+          <label class="upload-form__upload-label" for="upload">Browse</label>
+          <input
+            :accept="acceptedFormates"
+            id="upload"
+            class="upload-form__input"
+            type="file"
+            multiple
+            @change=""
+          />
+        </span>
+        <legend class="upload-form__legend">{{ supportedFormatesText }}</legend>
       </form>
       <UploadingFiles :uploadingFiles="filesMock" />
       <UploadedFiles :uploadedFiles="filesMock" />
@@ -28,9 +34,11 @@
 <script setup lang="ts">
 import { UploadIcon } from '@/components/icons';
 import { SUPPORTED_FORMATES } from '@/config';
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 import UploadedFiles from './UploadedFiles.vue';
 import UploadingFiles from './UploadingFiles.vue';
+
+const isFormHighlighted = ref<boolean>(false);
 
 const supportedFormatesText = computed<string>(
   () => `Supported formates: ${SUPPORTED_FORMATES.join(', ')}`
@@ -38,6 +46,21 @@ const supportedFormatesText = computed<string>(
 const acceptedFormates = computed<string>(
   () => '.' + SUPPORTED_FORMATES.join(', .').toLowerCase()
 );
+
+const highlightForm = () => (isFormHighlighted.value = true);
+
+const unhighlightForm = () => (isFormHighlighted.value = false);
+
+const handleDrop = (event: DragEvent) => {
+  unhighlightForm();
+  const dataTransfer = event.dataTransfer;
+  const files = dataTransfer?.files;
+  if (files) handleFiles(files);
+};
+
+const handleFiles = (files: FileList) => {
+  console.log(files);
+};
 
 const filesMock = [
   { id: '1', name: 'I am an uploading file name', progress: 55 },
@@ -68,7 +91,6 @@ const filesMock = [
 }
 
 .upload-form {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,6 +102,12 @@ const filesMock = [
   background-color: $secondary-background;
   border: 2px dashed $border-color;
   border-radius: 4px;
+  transition: all 300ms ease-in-out;
+
+  &--highlighted {
+    border: 2px dashed $accept-color;
+    transform: scale($form-scale);
+  }
 
   &__icon {
     width: 69px;
@@ -87,30 +115,41 @@ const filesMock = [
     margin-bottom: 20px;
   }
 
+  &__fieldset {
+    height: fit-content;
+    padding: 0;
+    margin: 0 0 5px 0;
+    text-align: center;
+    border: none;
+  }
+
   &__caption {
-    margin-bottom: 5px;
     font-weight: $bold-weight;
     font-size: $lg-text;
     line-height: $lg-lh;
   }
 
-  &__excerpt {
+  &__upload-label {
+    font-weight: $bold-weight;
+    font-size: $lg-text;
+    line-height: $lg-lh;
     color: $accept-color;
     text-decoration-line: underline;
+    cursor: pointer;
   }
 
-  &__desc {
+  &__legend {
+    padding: 0;
     font-size: $sm-text;
     line-height: $sm-lh;
     color: $title-color;
   }
 
   &__input {
-    position: absolute;
-    inset: 0;
+    width: 0;
+    height: 0;
+    visibility: hidden;
     cursor: pointer;
-    opacity: 0;
-    filter: alpha(opacity=0);
   }
 }
 </style>

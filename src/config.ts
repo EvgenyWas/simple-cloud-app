@@ -3,7 +3,7 @@ export enum STORAGE_KEYS {
 }
 
 export const SUPPORTED_FORMATES = [
-  'JPEG',
+  'JPG',
   'PNG',
   'GIF',
   'MP4',
