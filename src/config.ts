@@ -2,14 +2,20 @@ export enum STORAGE_KEYS {
   USER_ID = 'user_id',
 }
 
-export const SUPPORTED_FORMATES = [
+// Supported files formates according to Cloudinary
+export const SUPPORTED_IMAGE_FORMATES = [
   'JPG',
+  'JPEG',
   'PNG',
+  'SVG',
   'GIF',
-  'MP4',
+  'HEIC',
   'PDF',
-  'PSD',
-  'AI',
-  'Word',
-  'PPT',
+];
+export const SUPPORTED_VIDEO_FORMATES = ['MP4'];
+export const SUPPORTED_AUDIO_FORMATES = ['MP3'];
+export const SUPPORTED_FORMATES = [
+  ...SUPPORTED_IMAGE_FORMATES,
+  ...SUPPORTED_AUDIO_FORMATES,
+  ...SUPPORTED_VIDEO_FORMATES,
 ];
