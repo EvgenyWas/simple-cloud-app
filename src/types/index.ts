@@ -9,3 +9,11 @@ export type TUploadedFile = {
   name: string;
   link: string;
 };
+
+export type TFormDataOptions = {
+  api_key: string;
+  timestamp: number;
+  signature: string;
+  eager?: string;
+  folder?: string;
+};
