@@ -8,7 +8,9 @@
     },
     "lib": [
         "es2017",
+        "es6",
         "dom",
+        "dom.iterable",
         "scripthost",
     ]
   },
