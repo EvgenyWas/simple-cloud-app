@@ -17,3 +17,8 @@ export type TFormDataOptions = {
   eager?: string;
   folder?: string;
 };
+
+export type TSignData = {
+  timestamp: number;
+  signature: string;
+};
