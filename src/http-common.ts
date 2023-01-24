@@ -8,9 +8,10 @@ const apiClient: AxiosInstance = axios.create({
   baseURL: BASE_URL + CLOUD_NAME,
   headers: {
     accept: '*/*',
-    'Content-type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, DELETE',
+    'X-Requested-With': 'XMLHttpRequest',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Content-Type':
+      'multipart/form-data; boundary=----WebKitFormBoundaryp6AxLbJ1pNXgOHOw',
   },
 });
 
