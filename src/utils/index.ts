@@ -1,4 +1,4 @@
-import type { TFormDataOptions, TSignData } from '@/types';
+import type { IFormDataOptions, ISignatureOptions, TSignData } from '@/types';
 
 /**
  * Funstion to get timestamp for Cloudinary
@@ -40,7 +40,7 @@ export function sortAlphabetically(strings: Array<string>): Array<string> {
  * @returns ready string for decoding
  */
 export function getEncodingString(
-  options: Record<string, string | number>,
+  options: Omit<IFormDataOptions, 'api_key' | 'signature'>,
   secret: string
 ): string {
   const entries = Object.entries(options).map((entry) => entry.join('='));
@@ -58,7 +58,7 @@ export function getEncodingString(
  */
 export async function getSignData(
   secret: string,
-  options?: Record<string, string | number>
+  options?: ISignatureOptions
 ): Promise<TSignData> {
   const timestamp = getTimestamp();
   const signApiOptions = {
@@ -79,10 +79,10 @@ export async function getSignData(
  */
 export function appendFormDataOptions(
   formData: FormData,
-  options: TFormDataOptions
+  options: IFormDataOptions
 ) {
   Object.keys(options).forEach((key) => {
-    formData.append(key, String(options[key as keyof TFormDataOptions]));
+    formData.append(key, String(options[key as keyof IFormDataOptions]));
   });
 
   return formData;
