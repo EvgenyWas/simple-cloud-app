@@ -9,7 +9,6 @@ const apiClient: AxiosInstance = axios.create({
   headers: {
     accept: '*/*',
     'X-Requested-With': 'XMLHttpRequest',
-    'Accept-Encoding': 'gzip, deflate, br',
     'Content-Type':
       'multipart/form-data; boundary=----WebKitFormBoundaryp6AxLbJ1pNXgOHOw',
   },
