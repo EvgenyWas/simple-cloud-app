@@ -1,7 +1,11 @@
 import http from '@/http-common';
-import type { TFormDataOptions } from '@/types';
+import type {
+  IFormDataOptions,
+  ISignatureOptions,
+  TUploadResponse,
+} from '@/types';
 import { appendFormDataOptions, getSignData } from '@/utils';
-import type { AxiosRequestConfig } from 'axios';
+import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export default class FileSharingService {
   private _api_key: string;
@@ -11,15 +15,28 @@ export default class FileSharingService {
     (this._api_key = api_key), (this._api_secret = api_secret);
   }
 
-  async uploadFileAuto(formData: FormData, config?: AxiosRequestConfig) {
-    const { timestamp, signature } = getSignData(this._api_secret);
-    const formDataOptions: TFormDataOptions = {
+  async uploadFileAuto(
+    folder: string,
+    formData: FormData,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<TUploadResponse>> {
+    const signatureOptions: ISignatureOptions = {
+      folder: folder,
+      use_filename: true,
+    };
+    const { timestamp, signature } = await getSignData(
+      this._api_secret,
+      signatureOptions
+    );
+    const formDataOptions: IFormDataOptions = {
       api_key: this._api_key,
       timestamp: timestamp,
       signature: signature,
+      folder: folder,
+      use_filename: true,
     };
     const finishedFormData = appendFormDataOptions(formData, formDataOptions);
 
-    return http.post('/auto/uplaod', finishedFormData, config);
+    return http.post('/auto/upload', finishedFormData, config);
   }
 }
