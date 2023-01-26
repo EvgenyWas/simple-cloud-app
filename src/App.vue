@@ -6,14 +6,14 @@
 
 <script setup lang="ts">
 import { v4 as uuidv4 } from 'uuid';
-import { onMounted } from 'vue';
+import { onBeforeMount } from 'vue';
 import MainBox from './components/MainBox/MainBox.vue';
 import { useStorage } from './composables';
 import { STORAGE_KEYS } from './config';
 
 const { storageValue, setItem } = useStorage(STORAGE_KEYS.USER_ID, '');
 
-onMounted(() => {
+onBeforeMount(() => {
   if (!storageValue.value) {
     setItem(uuidv4());
   }
