@@ -20,23 +20,34 @@
             class="upload-form__input"
             type="file"
             multiple
-            @change=""
+            @change="handleChange"
           />
         </span>
         <legend class="upload-form__legend">{{ supportedFormatesText }}</legend>
       </form>
-      <UploadingFiles :uploadingFiles="filesMock" />
-      <UploadedFiles :uploadedFiles="filesMock" />
+      <UploadingFiles :uploadingFiles="upload.uploadingFiles" />
+      <UploadedFiles :uploadedFiles="uploaded.uploadedFiles" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { UploadIcon } from '@/components/icons';
+import { useUpload, useUploaded } from '@/composables';
 import { SUPPORTED_FORMATES } from '@/config';
-import { ref, computed } from 'vue';
+import type { HTMLInputEvent } from '@/types';
+import { computed, ref } from 'vue';
 import UploadedFiles from './UploadedFiles.vue';
 import UploadingFiles from './UploadingFiles.vue';
+
+type Props = {
+  userId: string;
+};
+
+const props = defineProps<Props>();
+
+const upload = useUpload(props.userId);
+const uploaded = useUploaded();
 
 const isFormHighlighted = ref<boolean>(false);
 
@@ -55,17 +66,20 @@ const handleDrop = (event: DragEvent) => {
   unhighlightForm();
   const dataTransfer = event.dataTransfer;
   const files = dataTransfer?.files;
-  if (files) handleFiles(files);
+  if (files) {
+    upload.uploadFiles(files, uploaded.addUploadedFile);
+  }
 };
 
-const handleFiles = (files: FileList) => {
-  console.log(files);
+const handleChange = (event: Event) => {
+  const { target } = event as HTMLInputEvent;
+  const files = target.files;
+  if (files?.length) {
+    upload.uploadFiles(files, uploaded.addUploadedFile);
+  } else {
+    alert('Choose a file please');
+  }
 };
-
-const filesMock = [
-  { id: '1', name: 'I am an uploading file name', progress: 55 },
-  { id: '2', name: 'I am an uploading file name', progress: 25 },
-];
 </script>
 
 <style scoped lang="scss">
