@@ -7,8 +7,12 @@
         :key="file.id"
         class="uploaded-files__item"
       >
-        <p class="uploaded-files__name">{{ file.name }}</p>
-        <a :href="file.link" class="uploaded-files__download">
+        <p class="uploaded-files__name">{{ `${file.name}.${file.format}` }}</p>
+        <a
+          :href="file.link"
+          :download="file.name"
+          class="uploaded-files__download"
+        >
           <DownloadIcon />
         </a>
         <button class="uploaded-files__remove" @click="removeFile">
