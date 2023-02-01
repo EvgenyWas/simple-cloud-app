@@ -2,6 +2,7 @@ export type TUploadingFile = {
   id: string;
   name: string;
   progress: number;
+  handleAbort: () => void;
 };
 
 export type TUploadedFile = {

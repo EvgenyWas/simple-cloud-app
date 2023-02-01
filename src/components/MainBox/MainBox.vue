@@ -25,7 +25,10 @@
         </span>
         <legend class="upload-form__legend">{{ supportedFormatesText }}</legend>
       </form>
-      <UploadingFiles :uploadingFiles="upload.uploadingFiles" />
+      <UploadingFiles
+        :uploadingFiles="upload.uploadingFiles"
+        @remove="upload.removeUploadingFile"
+      />
       <UploadedFiles :uploadedFiles="uploaded.uploadedFiles" />
     </div>
   </div>

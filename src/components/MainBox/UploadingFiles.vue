@@ -8,7 +8,10 @@
         class="uploading-files__item"
       >
         <p class="uploading-files__name">{{ file.name }}</p>
-        <button class="uploading-files__remove" @click="removeFile">
+        <button
+          class="uploading-files__remove"
+          @click="emit('remove', file.id, file.handleAbort)"
+        >
           <RemoveIcon />
         </button>
         <UiProgressBar :progress="file.progress" />
@@ -27,11 +30,14 @@ type Props = {
   uploadingFiles: Array<TUploadingFile>;
 };
 
+type Emits = {
+  (e: 'remove', fileId: string, handler: () => void): void;
+};
+
 defineProps<Props>();
+const emit = defineEmits<Emits>();
 
 const uploadingTitle = computed<string>(() => `Uploading - `);
-
-const removeFile = () => {};
 </script>
 
 <style scoped lang="scss">
