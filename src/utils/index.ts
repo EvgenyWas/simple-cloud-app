@@ -1,4 +1,10 @@
-import type { IFormDataOptions, ISignatureOptions, TSignData } from '@/types';
+import type {
+  IFormDataOptions,
+  ISignatureOptions,
+  TSignData,
+  TUploadResponse,
+  TUploadedFile,
+} from '@/types';
 
 /**
  * Funstion to get timestamp for Cloudinary
@@ -86,4 +92,25 @@ export function appendFormDataOptions(
   });
 
   return formData;
+}
+
+/**
+ * Function to get formatted uploaded file
+ * @param response data from upload auto file response
+ * @param id target file id
+ * @returns formatted object according TUploadedFile type
+ */
+export function getFormattedUploadedFile(
+  response: TUploadResponse,
+  id: string
+): TUploadedFile {
+  const { original_filename, public_id, format, url } = response;
+
+  return {
+    id: id,
+    public_id: public_id,
+    name: original_filename,
+    format: format,
+    link: url,
+  };
 }
