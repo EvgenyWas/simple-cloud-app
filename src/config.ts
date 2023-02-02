@@ -1,3 +1,4 @@
+// Storage
 export enum STORAGE_KEYS {
   USER_ID = 'user_id',
 }
@@ -19,3 +20,6 @@ export const SUPPORTED_FORMATES = [
   ...SUPPORTED_AUDIO_FORMATES,
   ...SUPPORTED_VIDEO_FORMATES,
 ];
+
+// Misc
+export const UPLOADING_DELAY = 500;
