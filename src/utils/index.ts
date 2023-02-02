@@ -1,6 +1,6 @@
 import type {
   IFormDataOptions,
-  ISignatureOptions,
+  IUploadOptions,
   TSignData,
   TUploadResponse,
   TUploadedFile,
@@ -64,7 +64,7 @@ export function getEncodingString(
  */
 export async function getSignData(
   secret: string,
-  options?: ISignatureOptions
+  options?: IUploadOptions
 ): Promise<TSignData> {
   const timestamp = getTimestamp();
   const signApiOptions = {
@@ -92,6 +92,35 @@ export function appendFormDataOptions(
   });
 
   return formData;
+}
+
+/**
+ * Function to prepare FormData options for uploading to Cloudinary
+ * @param api_secret
+ * @param api_key
+ * @param folder object with optional params for specific settings
+ * @returns formDataOptions object to append them to FormData
+ */
+export async function getFormDataOptions(
+  api_secret: string,
+  api_key: string,
+  options?: IUploadOptions
+): Promise<IFormDataOptions> {
+  const signatureOptions: IUploadOptions = {
+    ...options,
+  };
+  const { timestamp, signature } = await getSignData(
+    api_secret,
+    signatureOptions
+  );
+  const formDataOptions: IFormDataOptions = {
+    api_key: api_key,
+    timestamp: timestamp,
+    signature: signature,
+    ...options,
+  };
+
+  return formDataOptions;
 }
 
 /**
