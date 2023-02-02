@@ -7,18 +7,19 @@ export type TUploadingFile = {
 
 export type TUploadedFile = {
   id: string;
+  public_id: string;
   name: string;
   format: string;
   link: string;
 };
 
-export interface ISignatureOptions {
+export interface IUploadOptions {
   folder?: string;
   use_filename?: boolean;
   eager?: string;
 }
 
-export interface IFormDataOptions extends ISignatureOptions {
+export interface IFormDataOptions extends IUploadOptions {
   api_key: string;
   timestamp: number;
   signature: string;

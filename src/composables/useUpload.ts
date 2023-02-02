@@ -1,3 +1,4 @@
+import { UPLOADING_DELAY } from '@/config';
 import { fileSharing } from '@/services';
 import type { TUploadedFile, TUploadingFile } from '@/types';
 import { getFormattedUploadedFile } from '@/utils';
@@ -46,20 +47,30 @@ export default function useUpload(userId: string) {
 
     formData.append('file', file);
 
+    const uploadOptions = {
+      folder: userId,
+      use_filename: true,
+    };
+    const uploadConfig = {
+      onUploadProgress: (event: AxiosProgressEvent) =>
+        onUploadFileProgress(uploadingFileId, event),
+      signal,
+    };
+
     setTimeout(async () => {
       try {
-        const { data } = await fileSharing.uploadFileAuto(userId, formData, {
-          onUploadProgress: (event) =>
-            onUploadFileProgress(uploadingFileId, event),
-          signal,
-        });
+        const { data } = await fileSharing.uploadFileAuto(
+          formData,
+          uploadOptions,
+          uploadConfig
+        );
         const uploadedFile = getFormattedUploadedFile(data, uploadingFileId);
 
         handleUploaded(uploadedFile);
       } catch (error: any) {
         console.error(`Error: ${error.message}`);
       }
-    }, 500);
+    }, UPLOADING_DELAY);
   };
 
   const uploadFiles = (
