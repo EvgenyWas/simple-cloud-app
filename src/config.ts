@@ -21,5 +21,12 @@ export const SUPPORTED_FORMATES = [
   ...SUPPORTED_VIDEO_FORMATES,
 ];
 
+// Max file sizes in Mb
+export enum MAX_FILE_SIZES_MB {
+  IMAGE = 10,
+  VIDEO = 20,
+  AUDIO = 20,
+}
+
 // Misc
 export const UPLOADING_DELAY = 500;
