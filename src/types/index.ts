@@ -10,6 +10,7 @@ export type TUploadedFile = {
   public_id: string;
   name: string;
   format: string;
+  resource_type: string;
   link: string;
 };
 
@@ -17,6 +18,7 @@ export interface IUploadOptions {
   folder?: string;
   use_filename?: boolean;
   eager?: string;
+  public_id?: string;
 }
 
 export interface IFormDataOptions extends IUploadOptions {
