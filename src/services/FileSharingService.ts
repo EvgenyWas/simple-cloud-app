@@ -1,6 +1,10 @@
 import http from '@/http-common';
 import type { IUploadOptions, TUploadResponse } from '@/types';
-import { appendFormDataOptions, getFormDataOptions } from '@/utils';
+import {
+  appendFormDataOptions,
+  getDestroyPostData,
+  getFormDataOptions,
+} from '@/utils';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export default class FileSharingService {
@@ -24,5 +28,15 @@ export default class FileSharingService {
     const finishedFormData = appendFormDataOptions(formData, formDataOptions);
 
     return http.post('/auto/upload', finishedFormData, config);
+  }
+
+  async destroyFile(publicId: string, resourceType: string) {
+    const data = await getDestroyPostData(
+      this._api_secret,
+      this._api_key,
+      publicId
+    );
+
+    return http.post(`/${resourceType}/destroy`, data);
   }
 }
