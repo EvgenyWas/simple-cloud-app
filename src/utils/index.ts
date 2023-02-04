@@ -96,25 +96,19 @@ export function appendFormDataOptions(
 
 /**
  * Function to prepare FormData options for uploading to Cloudinary
- * @param api_secret
- * @param api_key
+ * @param apiSecret
+ * @param apiKey
  * @param folder object with optional params for specific settings
  * @returns formDataOptions object to append them to FormData
  */
 export async function getFormDataOptions(
-  api_secret: string,
-  api_key: string,
+  apiSecret: string,
+  apiKey: string,
   options?: IUploadOptions
 ): Promise<IFormDataOptions> {
-  const signatureOptions: IUploadOptions = {
-    ...options,
-  };
-  const { timestamp, signature } = await getSignData(
-    api_secret,
-    signatureOptions
-  );
+  const { timestamp, signature } = await getSignData(apiSecret, options);
   const formDataOptions: IFormDataOptions = {
-    api_key: api_key,
+    api_key: apiKey,
     timestamp: timestamp,
     signature: signature,
     ...options,
@@ -133,13 +127,38 @@ export function getFormattedUploadedFile(
   response: TUploadResponse,
   id: string
 ): TUploadedFile {
-  const { original_filename, public_id, format, url } = response;
+  const { original_filename, public_id, format, resource_type, url } = response;
 
   return {
     id: id,
     public_id: public_id,
     name: original_filename,
     format: format,
+    resource_type: resource_type,
     link: url,
+  };
+}
+
+/**
+ * Function to get data for post destroy request
+ * @param apiSecret
+ * @param apiKey
+ * @param publicId public_id of destroying file
+ * @returns ready data for post destroy request
+ */
+export async function getDestroyPostData(
+  apiSecret: string,
+  apiKey: string,
+  publicId: string
+): Promise<IFormDataOptions> {
+  const { timestamp, signature } = await getSignData(apiSecret, {
+    public_id: publicId,
+  });
+
+  return {
+    public_id: publicId,
+    timestamp,
+    signature: signature,
+    api_key: apiKey,
   };
 }
