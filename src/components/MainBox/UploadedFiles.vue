@@ -15,7 +15,7 @@
         >
           <DownloadIcon />
         </a>
-        <button class="uploaded-files__remove" @click="removeFile">
+        <button class="uploaded-files__remove" @click="emit('remove', file.id)">
           <BinIcon />
         </button>
       </li>
@@ -31,9 +31,12 @@ type Props = {
   uploadedFiles: Array<TUploadedFile>;
 };
 
-defineProps<Props>();
+type Emits = {
+  (e: 'remove', fileId: string): void;
+};
 
-const removeFile = () => {};
+defineProps<Props>();
+const emit = defineEmits<Emits>();
 </script>
 
 <style scoped lang="scss">

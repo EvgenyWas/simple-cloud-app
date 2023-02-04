@@ -29,7 +29,10 @@
         :uploadingFiles="upload.uploadingFiles"
         @remove="upload.removeUploadingFile"
       />
-      <UploadedFiles :uploadedFiles="uploaded.uploadedFiles" />
+      <UploadedFiles
+        :uploadedFiles="uploaded.uploadedFiles"
+        @remove="uploaded.removeUploadedFile"
+      />
     </div>
   </div>
 </template>
