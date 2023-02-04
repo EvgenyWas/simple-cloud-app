@@ -1,7 +1,7 @@
 /* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution')
+require('@rushstack/eslint-patch/modern-module-resolution');
 
-const [error, warn, off] = [2, 1, 0]
+const [error, warn, off] = [2, 1, 0];
 
 module.exports = {
   root: true,
@@ -66,25 +66,17 @@ module.exports = {
   },
   overrides: [
     {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)',
-      ],
-      env: { jest: true },
-    },
-    {
       files: ['*.vue'],
       parser: 'vue-eslint-parser',
       rules: {
         'vue/max-attributes-per-line': [
-          error,
+          'error',
           {
             singleline: {
               max: 3,
             },
             multiline: {
               max: 1,
-              allowFirstLine: false,
             },
           },
         ],
@@ -108,6 +100,5 @@ module.exports = {
     defineProps: 'readonly',
     defineEmits: 'readonly',
     withDefaults: 'readonly',
-    globalThis: true,
   },
-}
+};
