@@ -30,3 +30,4 @@ export enum MAX_FILE_SIZES_MB {
 
 // Misc
 export const UPLOADING_DELAY = 500;
+export const MAX_RESOURCES_RESULTS = 500;
