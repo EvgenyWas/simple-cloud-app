@@ -1,6 +1,6 @@
 <template>
   <div class="uploading-files">
-    <h3 class="uploading-files__title">{{ uploadingTitle }}</h3>
+    <h2 class="uploading-files__title">Uploading</h2>
     <TransitionGroup name="list" tag="ul" class="uploading-files__list">
       <li
         v-for="file in uploadingFiles"
@@ -22,9 +22,8 @@
 
 <script setup lang="ts">
 import { RemoveIcon } from '@/components/icons';
+import UiProgressBar from '@/components/ui/UiProgressBar.vue';
 import type { TUploadingFile } from '@/types';
-import { computed } from 'vue';
-import UiProgressBar from '../ui/UiProgressBar.vue';
 
 type Props = {
   uploadingFiles: Array<TUploadingFile>;
@@ -36,8 +35,6 @@ type Emits = {
 
 defineProps<Props>();
 const emit = defineEmits<Emits>();
-
-const uploadingTitle = computed<string>(() => `Uploading - `);
 </script>
 
 <style scoped lang="scss">
@@ -97,6 +94,26 @@ const uploadingTitle = computed<string>(() => `Uploading - `);
 
     &:hover {
       background-color: $title-color;
+    }
+  }
+}
+
+@include md {
+  .uploading-files {
+    margin-bottom: 15px;
+
+    &__name {
+      width: 170px;
+      padding-right: 10px;
+      font-size: $xs-text;
+      line-height: $xs-lh;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &__download {
+      margin-right: 10px;
     }
   }
 }

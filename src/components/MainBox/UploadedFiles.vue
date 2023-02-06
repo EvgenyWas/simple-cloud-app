@@ -1,6 +1,6 @@
 <template>
   <div class="uploaded-files">
-    <h3 class="uploaded-files__title">Uploaded</h3>
+    <h2 class="uploaded-files__title">Uploaded</h2>
     <TransitionGroup name="list" tag="ul" class="uploaded-files__list">
       <li
         v-for="file in uploadedFiles"
@@ -112,6 +112,26 @@ const emit = defineEmits<Emits>();
 
     &:hover {
       background-color: $outline-color;
+    }
+  }
+}
+
+@include md {
+  .uploaded-files {
+    margin-bottom: 15px;
+
+    &__name {
+      width: 170px;
+      padding-right: 10px;
+      font-size: $xs-text;
+      line-height: $xs-lh;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &__download {
+      margin-right: 10px;
     }
   }
 }

@@ -53,7 +53,7 @@ type Props = {
 const props = defineProps<Props>();
 
 const upload = useUpload(props.userId);
-const uploaded = useUploaded();
+const uploaded = useUploaded(props.userId);
 
 const isFormHighlighted = ref<boolean>(false);
 
@@ -170,6 +170,63 @@ const handleChange = (event: Event) => {
     height: 0;
     visibility: hidden;
     cursor: pointer;
+  }
+}
+
+@include lg {
+  .main-box {
+    &__container {
+      padding: 25px 42px;
+    }
+  }
+
+  .upload-form {
+    padding: 25px;
+  }
+}
+
+@include md {
+  .main-box {
+    &__container {
+      gap: 15px;
+      padding: 20px 35px;
+    }
+  }
+
+  .upload-form {
+    padding: 15px;
+    background: none;
+    border: none;
+
+    &__caption {
+      display: none;
+    }
+
+    &__legend {
+      text-align: center;
+    }
+  }
+}
+
+@include sm {
+  .main-box {
+    &__container {
+      padding: 15px 20px;
+    }
+
+    &__title {
+      margin: 0;
+      font-size: $lg-text;
+      line-height: $lg-lh;
+    }
+  }
+
+  .upload-form {
+    padding: 10px;
+
+    &__icon {
+      margin-bottom: 5px;
+    }
   }
 }
 </style>

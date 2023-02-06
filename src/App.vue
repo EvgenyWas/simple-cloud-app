@@ -27,5 +27,12 @@ onBeforeMount(() => {
   justify-content: center;
   width: 100%;
   height: 100vh;
+  padding: 15px;
+}
+
+@include sm {
+  .main {
+    padding: 10px;
+  }
 }
 </style>
