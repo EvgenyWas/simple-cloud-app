@@ -25,12 +25,9 @@ export default function useUploaded() {
     }
   };
 
-  const loadUploadedFiles = (userId: string) => {};
-
   return {
     uploadedFiles,
     addUploadedFile,
     removeUploadedFile,
-    loadUploadedFiles,
   };
 }

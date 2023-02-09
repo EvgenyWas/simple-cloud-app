@@ -53,7 +53,7 @@ type Props = {
 const props = defineProps<Props>();
 
 const upload = useUpload(props.userId);
-const uploaded = useUploaded(props.userId);
+const uploaded = useUploaded();
 
 const isFormHighlighted = ref<boolean>(false);
 
