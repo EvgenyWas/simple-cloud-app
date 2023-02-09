@@ -25,9 +25,7 @@ export const SUPPORTED_FORMATES = [
 export enum MAX_FILE_SIZES_MB {
   IMAGE = 10,
   VIDEO = 20,
-  AUDIO = 20,
 }
 
 // Misc
 export const UPLOADING_DELAY = 500;
-export const MAX_RESOURCES_RESULTS = 500;
