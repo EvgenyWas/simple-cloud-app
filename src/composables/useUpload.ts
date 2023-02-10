@@ -1,7 +1,11 @@
 import { UPLOADING_DELAY } from '@/config';
 import { fileSharing } from '@/services';
 import type { TUploadedFile, TUploadingFile } from '@/types';
-import { getFormattedUploadedFile } from '@/utils';
+import {
+  alertUnsupportedFileSize,
+  getFormattedUploadedFile,
+  validateFileSize,
+} from '@/utils';
 import type { AxiosProgressEvent } from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { reactive } from 'vue';
@@ -82,7 +86,11 @@ export default function useUpload(userId: string) {
     iterableFiles.forEach((file) => {
       const controller = new AbortController();
 
-      uploadFile(file, handleUploaded, controller);
+      if (validateFileSize(file)) {
+        uploadFile(file, handleUploaded, controller);
+      } else {
+        alertUnsupportedFileSize(file.type);
+      }
     });
   };
 
