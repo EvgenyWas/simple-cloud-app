@@ -1,11 +1,12 @@
 import { alertUnsupportedFileSize } from './alerts';
 import {
   appendFormDataOptions,
-  getFormDataOptions,
-  getFormattedUploadedFile,
   getDestroyPostData,
+  getFormattedUploadedFile,
+  getFormDataOptions,
 } from './prepares';
 import { getSignData } from './sign';
+import { validateFileSize } from './validate';
 
 export {
   alertUnsupportedFileSize,
@@ -14,4 +15,5 @@ export {
   getFormattedUploadedFile,
   getDestroyPostData,
   getSignData,
+  validateFileSize,
 };
